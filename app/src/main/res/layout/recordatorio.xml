@@ -18,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:textColor="@color/colorPrimaryDark"
+            android:textColor="@color/white"
             android:text="Monday"
             android:textSize="20sp"
             android:gravity="center_horizontal"/>
@@ -27,7 +27,7 @@
             android:id="@+id/txtDiaRecordatorio"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorAccent"
+            android:textColor="@color/black"
             android:text="Friday"
             android:gravity="center"
             android:textSize="15sp"/>
@@ -37,7 +37,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
-            android:textColor="@color/colorPrimaryDark"
+            android:textColor="@color/white"
             android:text="friday"
             android:gravity="center"
             android:textSize="20sp" />
