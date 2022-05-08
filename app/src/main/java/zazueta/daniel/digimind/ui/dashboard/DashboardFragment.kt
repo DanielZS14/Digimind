@@ -12,7 +12,10 @@ import android.widget.TimePicker
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import com.google.gson.Gson
+import zazueta.daniel.digimind.LoginActivity
 import zazueta.daniel.digimind.R
 import zazueta.daniel.digimind.Recordatorio
 import zazueta.daniel.digimind.databinding.FragmentDashboardBinding
@@ -24,10 +27,9 @@ import java.util.*
 class DashboardFragment : Fragment() {
 
     private var _binding: FragmentDashboardBinding? = null
+    private val db = Firebase.firestore
 
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -72,19 +74,18 @@ class DashboardFragment : Fragment() {
 
         Toast.makeText(context, "Se agrego la tarea", Toast.LENGTH_SHORT).show()
 
-        guardar_json()
+        guardarFirestore(tarea)
     }
 
-    fun guardar_json(){
+    fun guardarFirestore(tarea: Recordatorio){
 
-        val preferencias = context?.getSharedPreferences("preferencias", Context.MODE_PRIVATE)
-        val editor =  preferencias?.edit()
-
-        val gson: Gson = Gson()
-        var json = gson.toJson(HomeFragment.tasks)
-
-        editor?.putString("tareas", json)
-        editor?.apply()
+        val user = hashMapOf(
+            "actividad" to tarea.nombre,
+            "dia" to tarea.dia,
+            "tiempo" to tarea.tiempo,
+            "user" to LoginActivity.emailUser
+        )
+        db.collection("actividades").add(user)
 
     }
 

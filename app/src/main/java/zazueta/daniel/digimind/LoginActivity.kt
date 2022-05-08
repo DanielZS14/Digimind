@@ -12,6 +12,9 @@ import zazueta.daniel.digimind.databinding.ActivityLoginBinding
 class LoginActivity : AppCompatActivity() {
     lateinit var binding: ActivityLoginBinding
     private lateinit var auth: FirebaseAuth
+    companion object{
+        lateinit var emailUser: String
+    }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -60,6 +63,7 @@ class LoginActivity : AppCompatActivity() {
                     val user = auth.currentUser
 
                     val intent: Intent = Intent(this, MainActivity::class.java)
+                    emailUser = email
                     startActivity(intent)
 
                 } else {

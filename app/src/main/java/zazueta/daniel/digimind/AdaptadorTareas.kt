@@ -13,7 +13,7 @@ import com.google.gson.Gson
 import zazueta.daniel.digimind.ui.home.HomeFragment
 
 class AdaptadorTareas: BaseAdapter {
-    lateinit var context: Context
+    var context: Context
     var tasks: ArrayList<Recordatorio> = ArrayList<Recordatorio>()
 
 
@@ -58,21 +58,21 @@ class AdaptadorTareas: BaseAdapter {
 
     fun eliminar(task:Recordatorio){
 
-        val alertDialog:AlertDialog? = context?.let {
+        val alertDialog:AlertDialog? = context.let {
             val builder = AlertDialog.Builder(it)
             builder.apply {
                 setPositiveButton(R.string.ok_button,
-                DialogInterface.OnClickListener { dialog, id ->
-                    //User clicked Ok button
-                    HomeFragment.tasks.remove(task)
-                    guardar_json()
-                    HomeFragment.adaptador.notifyDataSetChanged()
-                    Toast.makeText(context, R.string.msg_deleted, Toast.LENGTH_SHORT).show()
-                })
+                    DialogInterface.OnClickListener { dialog, id ->
+                        //User clicked Ok button
+                        HomeFragment.tasks.remove(task)
+                        guardar_json()
+                        HomeFragment.adaptador.notifyDataSetChanged()
+                        Toast.makeText(context, R.string.msg_deleted, Toast.LENGTH_SHORT).show()
+                    })
                 setNegativeButton(R.string.cancel_button,
-                DialogInterface.OnClickListener { dialog, id ->
-                    //User cancelled the dialog
-                })
+                    DialogInterface.OnClickListener { dialog, id ->
+                        //User cancelled the dialog
+                    })
             }
             //Set other dialog properties
             builder?.setMessage(R.string.msg).setTitle(R.string.title)
@@ -84,7 +84,7 @@ class AdaptadorTareas: BaseAdapter {
     }
     fun guardar_json(){
 
-        val preferencias = context?.getSharedPreferences("preferencias", Context.MODE_PRIVATE)
+        val preferencias = context.getSharedPreferences("preferencias", Context.MODE_PRIVATE)
         val editor =  preferencias?.edit()
 
         val gson: Gson = Gson()
